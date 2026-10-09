@@ -1,0 +1,47 @@
+name: PHP CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'public/**'
+      - 'config/**'
+      - 'composer.json'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: pdo, pdo_mysql, mbstring
+        coverage: none
+
+    - name: Validate composer.json
+      run: composer validate --strict
+      working-directory: ./
+
+    - name: Check PHP syntax
+      run: |
+        find public/ -name "*.php" -exec php -l {} \;
+        find config/ -name "*.php" -exec php -l {} \;
+
+    - name: PHP CodeSniffer (опционально)
+      if: false  # Включи, если хочешь проверять стиль кода
+      run: |
+        composer require --dev squizlabs/php_codesniffer
+        vendor/bin/phpcs --standard=PSR12 public/ config/
+
+    - name: PHPStan static analysis (опционально)
+      if: false  # Включи для статического анализа
+      run: |
+        composer require --dev phpstan/phpstan
+        vendor/bin/phpstan analyse public/ config/ --level=5
