@@ -31,7 +31,7 @@ $history = $stmt->fetchAll();
 </head>
 <body>
     <header>
-        <h1>📊 История цен</h1>
+        <h1> История цен</h1>
         <nav>
             <a href="index.php">Товары</a>
             <a href="notifications.php">Уведомления</a>

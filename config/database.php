@@ -3,11 +3,8 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'price_tracker');
 define('DB_USER', 'root');
-define('DB_PASS', ''); // Укажи свой пароль, если есть
+define('DB_PASS', ''); 
 
-/**
- * Возвращает подключение к БД через PDO
- */
 function getDbConnection(): PDO {
     static $pdo = null;
     

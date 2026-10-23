@@ -3,7 +3,6 @@ require_once __DIR__ . '/../config/database.php';
 
 $pdo = getDbConnection();
 
-// Обработка добавления товара
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
     $url = trim($_POST['url']);
     if (filter_var($url, FILTER_VALIDATE_URL)) {
@@ -16,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['url'])) {
     }
 }
 
-// Обработка удаления
 if (isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
     $stmt = $pdo->prepare("DELETE FROM products WHERE id = ?");
@@ -25,7 +23,6 @@ if (isset($_GET['delete'])) {
     exit;
 }
 
-// Получение списка товаров с последней ценой
 $products = $pdo->query("
     SELECT p.id, p.url, p.title, 
            (SELECT price FROM price_history 
@@ -42,12 +39,12 @@ $products = $pdo->query("
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Price Tracker - Главная</title>
+    <title>PriceChuck - Главная</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <header>
-        <h1>📉 Price Tracker</h1>
+        <h1> PriceChuck</h1>
         <nav>
             <a href="index.php">Товары</a>
             <a href="notifications.php">Уведомления</a>

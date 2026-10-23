@@ -13,7 +13,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    # Настройка MySQL для интеграционных тестов
     services:
       mysql:
         image: mysql:8.0

@@ -16,10 +16,10 @@ jobs:
       run: |
         echo "Проверка на наличие секретов в коде..."
         if grep -r "password.*=.*['\"][^'\"]*['\"]" config/ python/config.py 2>/dev/null; then
-          echo "⚠️ Найдены возможные секреты в коде!"
+          echo " Найдены возможные секреты в коде"
           exit 1
         fi
-        echo "✅ Секреты не найдены"
+        echo " Секреты не найдены"
 
   check-env-files:
     runs-on: ubuntu-latest
@@ -29,10 +29,10 @@ jobs:
     - name: Check .env not committed
       run: |
         if [ -f "python/.env" ]; then
-          echo "❌ Файл .env не должен быть в репозитории!"
+          echo " Файл .env не должен быть в репозитории!"
           exit 1
         fi
-        echo "✅ .env файл не найден в репозитории"
+        echo ".env файл не найден в репозитории"
 
   check-dependencies:
     runs-on: ubuntu-latest
@@ -42,9 +42,9 @@ jobs:
     - name: Check Python dependencies
       run: |
         if [ -f "python/requirements.txt" ]; then
-          echo "✅ requirements.txt найден"
+          echo "requirements.txt найден"
           cat python/requirements.txt
         else
-          echo "❌ requirements.txt не найден!"
+          echo " requirements.txt не найден!"
           exit 1
         fi

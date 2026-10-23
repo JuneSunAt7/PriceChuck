@@ -3,14 +3,12 @@ require_once __DIR__ . '/../config/database.php';
 
 $pdo = getDbConnection();
 
-// Пометить все как прочитанные
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_read'])) {
     $pdo->exec("UPDATE notifications SET notified = 1 WHERE notified = 0");
     header("Location: notifications.php");
     exit;
 }
 
-// Получить все уведомления
 $notifications = $pdo->query("
     SELECT n.*, p.url, p.title 
     FROM notifications n
@@ -30,7 +28,7 @@ $unread_count = count(array_filter($notifications, fn($n) => !$n['notified']));
 </head>
 <body>
     <header>
-        <h1>🔔 Уведомления</h1>
+        <h1> Уведомления</h1>
         <nav>
             <a href="index.php">Товары</a>
             <a href="notifications.php">Уведомления</a>

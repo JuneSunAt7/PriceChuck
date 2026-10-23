@@ -3,7 +3,6 @@ CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE price_tracker;
 
--- Таблица товаров
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     url VARCHAR(500) NOT NULL,
@@ -11,7 +10,6 @@ CREATE TABLE IF NOT EXISTS products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Таблица истории цен
 CREATE TABLE IF NOT EXISTS price_history (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
@@ -20,7 +18,6 @@ CREATE TABLE IF NOT EXISTS price_history (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
--- Таблица уведомлений
 CREATE TABLE IF NOT EXISTS notifications (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
