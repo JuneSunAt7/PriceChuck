@@ -1,5 +1,4 @@
 <?php
-// Настройки подключения к БД
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'price_tracker');
 define('DB_USER', 'root');
